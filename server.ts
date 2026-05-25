@@ -4,6 +4,7 @@ import cors from 'cors'
 import path from 'path'
 import dotenv from 'dotenv'
 import { BN } from '@dcomm-tech/dcomm-js'
+import rateLimit from 'express-rate-limit'
 
 import { RateLimiter, VerifyCaptcha } from './middlewares'
 import EVM from './vms/evm'
@@ -40,6 +41,22 @@ new RateLimiter(app, [
 ])
 
 const captcha: VerifyCaptcha = new VerifyCaptcha(app, process.env.CAPTCHA_SECRET!, process.env.V2_CAPTCHA_SECRET)
+
+const addressLimiter = rateLimit({
+    windowMs: 1440 * 60 * 1000,
+    max: 1,
+    standardHeaders: true,
+    legacyHeaders: false,
+    skipFailedRequests: true,
+    message: {
+        message: "This destination address has already received faucet funds. Please try again tomorrow."
+    },
+    keyGenerator: (req) => {
+        const chain = String(req.body?.chain || '').toLowerCase()
+        const address = String(req.body?.address || '').toLowerCase()
+        return `${chain}:${address}`
+    }
+})
 
 let evms = new Map<string, EVMInstanceAndConfig>()
 
@@ -92,7 +109,7 @@ evmchains.forEach((chain: ChainType): void => {
 // })
 
 // POST request for sending tokens or coins
-router.post('/sendToken',captcha.middleware, async (req: any, res: any) => {
+router.post('/sendToken', captcha.middleware, addressLimiter, async (req: any, res: any) => {
     const address: string = req.body?.address
     const chain: string = req.body?.chain
     const erc20: string | undefined = req.body?.erc20
