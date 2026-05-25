@@ -507,7 +507,7 @@ const FaucetForm = (props: any) => {
                         <div className='v2-recaptcha' style={{marginTop: "10px"}}></div>
                         
                         <div className="beta-alert">
-                            <p>This is a devnet faucet. Funds are not real.</p>
+                            <p>This is a testnet faucet. Funds are not real.</p>
                         </div>
                     
                         <button style={{transition: "all 0.2s",textShadow: "0 0 1px rgba(255,255,255,0.5)",boxShadow: "0 0 5px rgba(255,255,255,0.3)",padding: "8px 16px",borderRadius: "4px",display: "inline-block"}}

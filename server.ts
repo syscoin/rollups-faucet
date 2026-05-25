@@ -64,9 +64,14 @@ const populateConfig = (child: any, parent: any): any => {
     return child
 }
 
+const chainPrivateKey = (chain: ChainType): string | undefined => {
+    const normalizedEnvKey = chain.ID.replace(/[^a-zA-Z0-9_]/g, "_")
+    return process.env[chain.ID] || process.env[normalizedEnvKey] || process.env.PK
+}
+
 // Setting up instance for EVM chains
 evmchains.forEach((chain: ChainType): void => {
-    const chainInstance: EVM = new EVM(chain, process.env[chain.ID] || process.env.PK)
+    const chainInstance: EVM = new EVM(chain, chainPrivateKey(chain))
     
     evms.set(chain.ID, {
         config: chain,
