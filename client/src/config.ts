@@ -1,13 +1,13 @@
 export const getConfig = () => {
     const defaultConfig = {
         brand: {
-            favicon: "/syscoin-icon.svg",
+            favicon: "/zksys-icon.svg",
             logo: {
-                dark: "/syscoin-icon.svg"
+                dark: "/zksys-icon.svg"
             },
             theme: {
-                primary: "#1f5eff",
-                secondary: "#0b1f5e"
+                primary: "rgb(1, 2, 20)",
+                secondary: "rgba(255, 255, 255, 0.2)"
             }
         }
     };

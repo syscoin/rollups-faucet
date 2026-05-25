@@ -3,13 +3,13 @@
   "name": "zkSYS Tanenbaum Faucet",
   "icons": [
     {
-      "src": "syscoin-icon.svg",
-      "sizes": "85x85",
+      "src": "zksys-icon.svg",
+      "sizes": "885x412",
       "type": "image/svg+xml"
     }
   ],
   "start_url": ".",
   "display": "standalone",
-  "theme_color": "#1f5eff",
+  "theme_color": "#010214",
   "background_color": "#ffffff"
 }
