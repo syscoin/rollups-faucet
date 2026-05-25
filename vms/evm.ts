@@ -268,13 +268,14 @@ export default class EVM {
         nonce: number | undefined,
         id?: string
     ): Promise<any> {
+        const eip1559Fees = this.LEGACY ? undefined : await this.getAdjustedEip1559Fees()
         const tx: any = {
             type: 2,
-            gas: "21000",
+            gas: "168692",
             nonce,
             to,
-            maxPriorityFeePerGas: this.MAX_PRIORITY_FEE,
-            maxFeePerGas: this.MAX_FEE,
+            maxPriorityFeePerGas: eip1559Fees?.maxPriorityFeePerGas ?? this.MAX_PRIORITY_FEE,
+            maxFeePerGas: eip1559Fees?.maxFeePerGas ?? this.MAX_FEE,
             value
         }
 
@@ -319,6 +320,40 @@ export default class EVM {
             this.error = true
             this.log.error(err.message)
             return 0
+        }
+    }
+
+    async getAdjustedEip1559Fees(): Promise<{ maxPriorityFeePerGas: string, maxFeePerGas: string }> {
+        try {
+            const configuredPriorityFee = new BN(this.MAX_PRIORITY_FEE)
+            const configuredMaxFee = new BN(this.MAX_FEE)
+            const gasPrice = new BN(await this.getGasPrice())
+            const latestBlock = await this.web3.eth.getBlock('latest')
+            const baseFee = latestBlock.baseFeePerGas ? new BN(latestBlock.baseFeePerGas) : new BN(0)
+
+            const priorityFee = configuredPriorityFee
+            const gasPriceFee = gasPrice.mul(new BN(2))
+            const baseFeeCap = baseFee.mul(new BN(3)).add(priorityFee)
+
+            let maxFee = configuredMaxFee
+            if(gasPriceFee.gt(maxFee)) {
+                maxFee = gasPriceFee
+            }
+            if(baseFeeCap.gt(maxFee)) {
+                maxFee = baseFeeCap
+            }
+
+            return {
+                maxPriorityFeePerGas: priorityFee.toString(),
+                maxFeePerGas: maxFee.toString()
+            }
+        } catch(err: any) {
+            this.error = true
+            this.log.error(err.message)
+            return {
+                maxPriorityFeePerGas: this.MAX_PRIORITY_FEE,
+                maxFeePerGas: this.MAX_FEE
+            }
         }
     }
 

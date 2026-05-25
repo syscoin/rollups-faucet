@@ -1,35 +1,34 @@
 {
-    "GLOBAL_RL": {
-        "ID": "GLOBAL",
-        "RATELIMIT": {
-            "REVERSE_PROXIES": 2,
-            "MAX_LIMIT": 40,
-            "WINDOW_SIZE": 1,
-            "PATH": "/",
-            "SKIP_FAILED_REQUESTS": false
-        }
-    },
-    "evmchains": [
-        {
-            "ID": "lumis-testnet",
-            "NAME": "Zeeve Testnet",
-            "TOKEN": "Zeeve",
-            "RPC": "https://rpc1.testnet.fomochain.io",
-            "CHAINID": 1,
-            "EXPLORER": "https://testnet.evm.fomoscan.io",
-            "IMAGE": "../../../faucet-icon-dark.png",
-            "MAX_PRIORITY_FEE": "2000000000",
-            "MAX_FEE": "100000000000",
-            "DRIP_AMOUNT": 2000000000,
-            "RECALIBRATE": 30,
-            "RATELIMIT": {
-                "MAX_LIMIT": 1,
-                "WINDOW_SIZE": 1440
-            },
-            "NETWORK":"Zeeve"
-        }
-    ],
-    "erc20tokens": [
-        
-    ]
+  "GLOBAL_RL": {
+    "ID": "GLOBAL",
+    "RATELIMIT": {
+      "REVERSE_PROXIES": 2,
+      "MAX_LIMIT": 40,
+      "WINDOW_SIZE": 1,
+      "PATH": "/",
+      "SKIP_FAILED_REQUESTS": false
+    }
+  },
+  "evmchains": [
+    {
+      "ID": "zkTanenbaum-Testnet",
+      "NAME": "zkTanenbaum Testnet",
+      "TOKEN": "TSYS",
+      "RPC": "https://rpc-zk.tanenbaum.io",
+      "CHAINID": 57057,
+      "EXPLORER": "https://explorer-zk.tanenbaum.io",
+      "IMAGE": "/syscoin-icon.svg",
+      "IMAGETOKEN": "/syscoin-icon.svg",
+      "MAX_PRIORITY_FEE": "2000000000",
+      "MAX_FEE": "100000000000",
+      "DRIP_AMOUNT": 10000000,
+      "RECALIBRATE": 30,
+      "RATELIMIT": {
+        "MAX_LIMIT": 1,
+        "WINDOW_SIZE": 1440
+      },
+      "NETWORK": "zkTanenbaum-Testnet"
+    }
+  ],
+  "erc20tokens": []
 }

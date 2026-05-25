@@ -13,8 +13,8 @@ export const config = {
         getBalance: '/getBalance',
         faucetAddress: 'faucetAddress'
     },
-    SITE_KEY: process.env.REACT_APP_SITE_KEY,
-    V2_SITE_KEY: process.env.REACT_APP_V2_SITE_KEY,
+    SITE_KEY: configurations.CAPTCHA.siteKey,
+    V2_SITE_KEY: configurations.CAPTCHA.v2siteKey,
     ACTION: configurations.CAPTCHA.action,
     banner: configurations.banner
 }

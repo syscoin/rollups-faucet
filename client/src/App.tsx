@@ -1,3 +1,4 @@
+import { ToastContainer } from "react-toastify";
 import FaucetForm from "./components/FaucetForm";
 import Contribute from "./components/Contribute";
 import ToggleTheme from "./components/ToggleTheme";
@@ -28,6 +29,7 @@ function App() {
   return (
     <ThemeContext.Provider value={{ theme, toggleTheme }}>
       <div className="app" id={theme}>
+        <ToastContainer/>
         <FaucetForm axios={axios} config={config} />
         {/*<Contribute /> */}
 {/*         <ToggleTheme theme={theme} setTheme={toggleTheme} /> */}

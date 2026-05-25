@@ -1,3 +1,4 @@
+import { toast } from "react-toastify"
 import { getConfig } from "../config"
 declare global {
     interface Window {
@@ -27,6 +28,7 @@ const addNetwork = async (config: any): Promise<void> => {
             blockExplorerUrls: config.EXPLORER ? [config.EXPLORER] : null
         }]
     }).catch((error: any): void => {
+        toast.error('The zkSYS chain is already added to your Metamask');
         console.log(error)
     })      
 }
@@ -50,6 +52,7 @@ const addAsset = async (config: any): Promise<void> => {
             }
         }
     }).catch((error: any): void => {
+        toast.error(error);
         console.log(error)
     })  
 }
@@ -60,12 +63,12 @@ export default function AddNetwork(props: any) {
         <div className='footer-buttons'>
             <button className="add-network font" onClick={() => {addNetwork(props.config)}}>
                 <img alt='metamask' style={{width: "25px", height: "25px", marginRight: "5px"}} src="/memtamask.png"/>
-                Add Subnet to Metamask
+                Add zkSYS to Metamask
             </button>
 
             <button className="add-network font" onClick={() => {window.open(`${props.config.EXPLORER}`, '_blank')}}>
                 <img alt="block-explorer" style={{width: "25px", height: "25px"}} src={config.brand.favicon ?? "/faucet-icon-dark.png"}/>
-                View Block Explorer
+                View zkSYS Explorer
             </button>
 
             {

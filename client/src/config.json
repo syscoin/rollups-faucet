@@ -1,11 +1,11 @@
 {
-    "banner": "/banner.png",
-    "apiBaseEndpointProduction": "/api/",
-    "apiBaseEndpointDevelopment": "http://localhost:8000/api/",
-    "apiTimeout": 10000,
-    "CAPTCHA": {
-        "siteKey": "6LdBQqwpAAAAAKJqKKuHLq9W32q71LMWXXpAAmj8",
-        "v2siteKey": "6LdiMqwpAAAAANx2bmSyN6e-YizYUHc4wsFaTUTs", 
-        "action": "faucetdrip"
-    }
+  "banner": "/banner.png",
+  "apiBaseEndpointProduction": "/api/",
+  "apiBaseEndpointDevelopment": "http://localhost:8000/api/",
+  "apiTimeout": 10000,
+  "CAPTCHA": {
+    "siteKey": "6Lc7vY8sAAAAAF-1aOWKdRfNQQ0VxK-erVyY64xW",
+    "v2siteKey": "6Lc7vY8sAAAAAF-1aOWKdRfNQQ0VxK-erVyY64xW",
+    "action": "faucetdrip"
+  }
 }

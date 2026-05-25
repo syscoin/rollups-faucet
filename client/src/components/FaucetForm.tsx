@@ -107,7 +107,7 @@ const FaucetForm = (props: any) => {
             const { chain: ch } = getChainParams();
 
             let item = <div className='select-dropdown'>
-                <img alt = { chain.NAME } src = { chain.IMAGE } />
+                <img alt = { chain.NAME } src = { chain.IMAGETOKEN } />
                 { chain.ID === ch ? chain.TOKEN : chain.NAME }
 
                 <span style={{color: 'rgb(180, 180, 183)', fontSize: "10px", marginLeft: "5px"}}>
@@ -500,17 +500,20 @@ const FaucetForm = (props: any) => {
                         </p>
 
                         <div className='address-input'>
-                            <input placeholder='Hexadecimal Address (0x...)' value={inputAddress || ""} onChange={(e) => updateAddress(e.target.value)} autoFocus/>
+                            <input placeholder='Destination zkSYS Wallet Address' value={inputAddress || ""} onChange={(e) => updateAddress(e.target.value)} autoFocus/>
                         </div>
                         <span className='rate-limit-text' style={{color: "red"}}>{sendTokenResponse?.message}</span>
 
                         <div className='v2-recaptcha' style={{marginTop: "10px"}}></div>
                         
                         <div className="beta-alert">
-                            <p>This is a testnet faucet. Funds are not real.</p>
+                            <p>This is a devnet faucet. Funds are not real.</p>
                         </div>
                     
-                        <button className={shouldAllowSend ? 'send-button' : 'send-button-disabled'} onClick={sendToken}>
+                        <button style={{transition: "all 0.2s",textShadow: "0 0 1px rgba(255,255,255,0.5)",boxShadow: "0 0 5px rgba(255,255,255,0.3)",padding: "8px 16px",borderRadius: "4px",display: "inline-block"}}
+                            onMouseOver={(e) => {e.currentTarget.style.textShadow = "0 0 2px rgba(255,255,255,0.8)";e.currentTarget.style.boxShadow = "0 0 6px rgba(255,255,255,0.5)";e.currentTarget.style.transform = "scale(1.02)";}}
+                            onMouseOut={(e) => {e.currentTarget.style.textShadow = "0 0 1px rgba(255,255,255,0.5)";e.currentTarget.style.boxShadow = "0 0 5px rgba(255,255,255,0.3)";e.currentTarget.style.transform = "scale(1)";}}
+                            className={shouldAllowSend ? 'send-button' : 'send-button-disabled'} onClick={sendToken}>
                             {
                                 isLoading
                                 ?
